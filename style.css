@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+    margin: 9%;
+}
+
+.container {
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+    background-color: white;
+    width: 80%;
+}
+
+.row {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.col {
+    flex-grow: 1;
+}
+
+.filter {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 5px;
+    background: rgb(214, 214, 214);
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: auto;
+    min-height: min-content; 
+}
+
+#header{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: orange;
+    color: white;
+    margin: 0px;
+    padding: 10px;
+}
+
+#bottom{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: orange;
+    color: white;
+    margin: 0px;
+    padding: 10px;
+}
