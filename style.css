@@ -1,15 +1,37 @@
 body {
     display: flex;
     justify-content: center;
-    background-color: grey;
-    margin: 9%;
+    background-color: rgb(153, 153, 153);
+    margin: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: small;
+}
+
+input {
+    border-radius: 20px;
+    width: 100%;
+    padding: 5px;
+    border: 1px;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px;
+    background-color: rgb(254, 134, 99);
+    color: white;
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+button:active {
+    box-shadow: 1px 1px grey;
+    background-color: rgb(153, 153, 153);
 }
 
 .container {
     display: flex;
-    border-radius: 5px;
     flex-direction: column;
-    background-color: white;
     width: 80%;
 }
 
@@ -20,38 +42,70 @@ body {
 
 .col {
     flex-grow: 1;
+    background-color: white;
+    min-height: min-content;
 }
 
 .filter {
     display: flex;
     justify-content: center;
     flex-grow: 1;
+    padding: 10px;
+    background: rgb(240, 240, 240);
+}
+
+.title {
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-color: rgb(240, 240, 240);
+    margin: 10px;
     padding: 5px;
-    background: rgb(214, 214, 214);
+    margin-right: 0px;
 }
 
 .list {
     display: flex;
-    justify-content: center;
-    flex-grow: 1;
+    flex-grow: 0;
     overflow: auto;
-    min-height: min-content; 
+    height: 60vh;
+    padding: 5px;
+    flex-direction: column;
 }
 
-#header{
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    background-color: orange;
+#header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: rgb(254, 134, 99);
     color: white;
     margin: 0px;
     padding: 10px;
 }
 
-#bottom{
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: orange;
+#bottom {
+    display: flex;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: rgb(240, 240, 240);
     color: white;
     margin: 0px;
     padding: 10px;
+    justify-content: flex-end;
+}
+
+.friend {
+    display: flex;
+    padding: 2px;
+    border: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: rgb(240, 240, 240);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friend img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
