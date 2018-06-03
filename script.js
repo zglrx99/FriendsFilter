@@ -160,6 +160,10 @@ manipulate.addEventListener('mousedown', (e) => {
 
 saver.addEventListener('click', ()=>{
     let storage = localStorage;
+    rightFilter.value = '';
+    leftFilter.value = '';
+    filterIt(rightList, rightFilter);
+    filterIt(leftList, leftFilter);
     storage['left-list'] = leftList.innerHTML;
     storage['right-list'] = rightList.innerHTML;
 })
