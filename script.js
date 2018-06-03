@@ -57,7 +57,6 @@ function callAPI(method, params) {
             leftList.innerHTML = storage['left-list'];
             rightList.innerHTML = storage['right-list'];
         } else {
-            console.log(friends);
             drawList(friends, leftList);
         }
     } catch (e) {
@@ -135,7 +134,6 @@ manipulate.addEventListener('mousedown', (e) => {
         document.onmouseup = function (e) {
             let list = mappedList.getBoundingClientRect();
             if(e.clientY > list.top && e.clientY < list.bottom && e.clientX > list.left && e.clientX < list.right) {
-                console.log(friend);
                 mappedList.id === 'left-list' ? friend.children[2].innerText = "+" : friend.children[2].innerText = "-";
                 mappedList.appendChild(friend);
             }
