@@ -3,6 +3,13 @@
 //   - открыть окно с запросом прав
 //   - разрешить выполнять действия от нашего имени
 
+const leftFilter = document.querySelector('#left-filter');
+const leftList = document.querySelector('#left-list');
+const rightFilter = document.querySelector('#right-filter');
+const rightList = document.querySelector('#right-list');
+const manipulate = document.querySelector('.row');
+const saver = document.querySelector('#save')
+
 VK.init({
     apiId: 6497462
 });
@@ -41,25 +48,22 @@ function callAPI(method, params) {
         });
         const headerInfo = document.querySelector('#header');
 
-        headerInfo.textContent = `Друзья на странице ${me.first_name} ${me.last_name}`;
+        headerInfo.textContent = `Друзья ${me.first_name} ${me.last_name}`;
         const friends = await callAPI('friends.get', {
             fields: 'city, country, photo_100'
         });
         let storage = localStorage;
-        if (storage['allFriends'] === undefined) {
-            storage['allFriends'] = JSON.stringify(friends);
+        if (storage['left-list'] !== undefined && storage['right-list'] !== undefined) {
+            leftList.innerHTML = storage['left-list'];
+            rightList.innerHTML = storage['right-list'];
+        } else {
+            console.log(friends);
+            drawList(friends, leftList);
         }
-        drawList(JSON.parse(localStorage['allFriends']), leftList);
     } catch (e) {
         console.error(e);
     }
 })();
-
-const leftFilter = document.querySelector('#left-filter');
-const leftList = document.querySelector('#left-list');
-const rightFilter = document.querySelector('#right-filter');
-const rightList = document.querySelector('#right-list');
-const manipulate = document.querySelector('.row');
 
 function drawList(friends, list) {
     const render = Handlebars.compile(document.querySelector('#user-template').textContent);
@@ -109,30 +113,37 @@ manipulate.addEventListener('mousedown', (e) => {
         friend = e.originalTarget.parentElement;
     }
     if (friend !== null) {
+        let mappedList;
+        friend.parentElement.id === 'left-list' ? mappedList = rightList : mappedList = leftList;
         friend.classList.add('dragElement');
         var coords = getCoords(friend);
         var shiftX = e.pageX - coords.left;
         var shiftY = e.pageY - coords.top;
-        console.log(friend)
 
         friend.style.position = 'absolute';
         moveAt(e);
         friend.style.zIndex = 1000;
 
-        document.onmouseup = function () {
-            document.onmousemove = null;
-            document.onmouseup = null;
-            friend.style = null;
-            friend.classList.remove('dragElement');
-        }
+        friend.ondragstart = function () {
+            return false;
+        };
 
         document.onmousemove = function (e) {
             moveAt(e);
         }
 
-        friend.ondragstart = function () {
-            return false;
-        };
+        document.onmouseup = function (e) {
+            let list = mappedList.getBoundingClientRect();
+            if(e.clientY > list.top && e.clientY < list.bottom && e.clientX > list.left && e.clientX < list.right) {
+                console.log(friend);
+                mappedList.id === 'left-list' ? friend.children[2].innerText = "+" : friend.children[2].innerText = "-";
+                mappedList.appendChild(friend);
+            }
+            document.onmousemove = null;
+            document.onmouseup = null;
+            friend.style = null;
+            friend.classList.remove('dragElement');
+        }
 
         function moveAt(e) {
             friend.style.left = e.pageX - shiftX + 'px';
@@ -148,3 +159,9 @@ manipulate.addEventListener('mousedown', (e) => {
         }
     }
 });
+
+saver.addEventListener('click', ()=>{
+    let storage = localStorage;
+    storage['left-list'] = leftList.innerHTML;
+    storage['right-list'] = rightList.innerHTML;
+})
