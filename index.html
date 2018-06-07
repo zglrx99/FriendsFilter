@@ -35,16 +35,25 @@
         </div>
     </div>
 
-    <script id="user-template" type="text/x-handlebars-template">
+    <script id="left-template" type="text/x-handlebars-template">
         {{#each items}}
-        <div class="friend">
+        <div class="friend" id="{{id}}">
             <img src="{{photo_100}}" />
             <div>{{first_name}} {{last_name}}</div>
             <button>+</button>
         </div>
         {{/each}}
     </script>
-    <script src="./script.js"></script>
+    <script id="right-template" type="text/x-handlebars-template">
+        {{#each items}}
+        <div class="friend" id="{{id}}">
+            <img src="{{photo_100}}" />
+            <div>{{first_name}} {{last_name}}</div>
+            <button>-</button>
+        </div>
+        {{/each}}
+    </script>
+    <script src="./script.js" type="module"></script>
 </body>
 
 </html>
